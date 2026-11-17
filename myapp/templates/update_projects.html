@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Project</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <h1>UPDATE CONSTRUCTION PROJECT</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Project Name:</label>
+        <input type="text" name="ProjectName"
+               value="{{ project.ProjectName }}" required>
+
+        <label>Location:</label>
+        <input type="text" name="Location"
+               value="{{ project.Location }}" required>
+
+        <label>Budget (UGX):</label>
+        <input type="number" name="Budget"
+               value="{{ project.Budget }}" min="0" step="0.01" required>
+
+        <label>Project Status:</label>
+        <select name="Status" required>
+            <option value="Planning" {% if project.Status == "Planning" %}selected{% endif %}>Planning</option>
+            <option value="Ongoing" {% if project.Status == "Ongoing" %}selected{% endif %}>Ongoing</option>
+            <option value="Completed" {% if project.Status == "Completed" %}selected{% endif %}>Completed</option>
+            <option value="On Hold" {% if project.Status == "On Hold" %}selected{% endif %}>On Hold</option>
+        </select>
+
+        <label>Select Client:</label>
+        <select name="Client" required>
+            {% for client in clients %}
+                <option value="{{ client.id }}"
+                    {% if project.Client_id == client.id %}selected{% endif %}>
+                    {{ client.Full_Name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Update Project</button>
+    </form>
+
+    <a href="{% url 'projects' %}">Back to Projects</a>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Project Assignment</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <h1>UPDATE PROJECT ASSIGNMENT</h1>
+
+    <p>Use this form to update an employee's project assignment.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="employee">Select Employee:</label>
+        <select id="employee" name="Employee" required>
+            {% for employee in employees %}
+                <option value="{{ employee.id }}"
+                    {% if assignment.Employee_id == employee.id %}selected{% endif %}>
+                    {{ employee.FirstName }} {{ employee.LastName }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="project">Select Project:</label>
+        <select id="project" name="Project" required>
+            {% for project in projects %}
+                <option value="{{ project.id }}"
+                    {% if assignment.Project_id == project.id %}selected{% endif %}>
+                    {{ project.ProjectName }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="role">Assignment Role:</label>
+        <input type="text" id="role" name="AssignmentRole"
+               value="{{ assignment.AssignmentRole }}" required>
+
+        <label for="date">Assignment Date:</label>
+        <input type="date" id="date" name="AssignmentDate"
+               value="{{ assignment.AssignmentDate|date:'Y-m-d' }}" required>
+
+        <button type="submit">Update Assignment</button>
+
+    </form>
+
+    <p>
+        <a href="{% url 'projectassignment' %}">Back to Project Assignments</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Construction Management System - Home
+{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div class="hero-slides" aria-hidden="true">
+        <img src="{% static 'images/images (36).jpg' %}" alt="">
+        <img src="{% static 'images/images (35).jpg' %}" alt="">
+        <img src="{% static 'images/images (33).jpg' %}" alt="">
+        <img src="{% static 'images/images (34).jpg' %}" alt="">
+    </div>
+
+    <div class="hero-text">
+        <h1>Every site, crew and payment in one place.</h1>
+        <p>
+            Keep records of clients, employees, projects, suppliers,
+            materials and payments, without the lost paperwork.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="/projects/">View projects</a>
+            <a class="btn btn-light" href="/clients/">Manage clients</a>
+        </div>
+        <p id="dateTime" class="hero-date"></p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+<section class="home-section">
+    <h2>What you can manage</h2>
+    <div class="module-grid">
+        <a class="module" href="/clients/">
+            <strong>Clients</strong>
+            <span>Contact details for the people you build for.</span>
+        </a>
+        <a class="module" href="/projects/">
+            <strong>Projects</strong>
+            <span>Budgets, progress and project status.</span>
+        </a>
+        <a class="module" href="/employees/">
+            <strong>Employees</strong>
+            <span>Staff records and their roles.</span>
+        </a>
+        <a class="module" href="/department/">
+            <strong>Departments</strong>
+            <span>How your company is organised.</span>
+        </a>
+        <a class="module" href="/projectassignment/">
+            <strong>Project assignments</strong>
+            <span>Which employee works on which project.</span>
+        </a>
+        <a class="module" href="/supplier/">
+            <strong>Suppliers</strong>
+            <span>Who supplies your materials.</span>
+        </a>
+        <a class="module" href="/materials/">
+            <strong>Materials</strong>
+            <span>Construction materials and stock levels.</span>
+        </a>
+        <a class="module" href="/payments/">
+            <strong>Payments</strong>
+            <span>Payments received from clients.</span>
+        </a>
+    </div>
+</section>
+
+<section class="home-section split">
+    <div>
+        <h2>Why this system</h2>
+        <p>
+            Managing information manually can lead to lost records, delays,
+            errors in financial records, and difficulty tracking projects
+            and materials. This system organises construction company
+            information in a database so it is accurate and easy to find.
+        </p>
+        <p>
+            It helps the company keep track of project budgets, project
+            progress, employee assignments, material stock, supplier
+            information, and payments made by clients. Users can add,
+            view, update and delete records in every section.
+        </p>
+    </div>
+
+    <div>
+        <h2>System objectives</h2>
+        <ul class="objectives">
+            <li>Manage client information.</li>
+            <li>Keep employee and department records.</li>
+            <li>Manage construction projects and budgets.</li>
+            <li>Track suppliers and construction materials.</li>
+            <li>Record payments made for projects.</li>
+            <li>Manage employee project assignments.</li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    function displayDateTime() {
+        let now = new Date();
+
+        document.getElementById("dateTime").textContent =
+            "Current date and time: " + now.toLocaleString();
+    }
+
+    displayDateTime();
+</script>
+
+{% endblock %}

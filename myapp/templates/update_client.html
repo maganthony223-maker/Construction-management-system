@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Client</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <h1>CONSTRUCTION MANAGEMENT SYSTEM</h1>
+        <h2>Update Client Information</h2>
+    </header>
+
+    <main>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Full Name:</label>
+            <input type="text" name="Full_Name"
+                   value="{{ client.Full_Name }}" required>
+
+            <label>Phone Number:</label>
+            <input type="text" name="Phone_Number"
+                   value="{{ client.Phone_Number }}" required>
+
+            <label>Email:</label>
+            <input type="email" name="Email"
+                   value="{{ client.Email }}" required>
+
+            <label>Address:</label>
+            <input type="text" name="Address"
+                   value="{{ client.Address }}" required>
+
+            <button type="submit">Update Client</button>
+
+            <a href="{% url 'clients' %}">Cancel</a>
+        </form>
+
+    </main>
+
+</body>
+</html>

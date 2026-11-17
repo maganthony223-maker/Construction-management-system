@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <h1>UPDATE EMPLOYEE</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name"
+               name="FirstName"
+               value="{{ employee.FirstName }}" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name"
+               name="LastName"
+               value="{{ employee.LastName }}" required>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender"
+               name="Gender"
+               value="{{ employee.Gender }}" required>
+
+        <label for="position">Position:</label>
+        <input type="text" id="position"
+               name="Position"
+               value="{{ employee.Position }}" required>
+
+        <label for="salary">Salary (UGX):</label>
+        <input type="number" id="salary"
+               name="Salary"
+               value="{{ employee.Salary }}"
+               min="0" step="0.01" required>
+
+        <label for="hire_date">Hire Date:</label>
+        <input type="date" id="hire_date"
+               name="Hire_Date"
+               value="{{ employee.Hire_Date|date:'Y-m-d' }}"
+               required>
+
+        <label for="department">Department:</label>
+        <select id="department" name="Department" required>
+            {% for dept in departments %}
+                <option value="{{ dept.id }}"
+                    {% if dept.id == employee.Department_id %}
+                        selected
+                    {% endif %}>
+                    {{ dept.Department_Name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Update Employee</button>
+
+        <a href="{% url 'employees' %}">Cancel</a>
+
+    </form>
+
+</body>
+</html>

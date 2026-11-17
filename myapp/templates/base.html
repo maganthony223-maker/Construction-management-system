@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Construction Management System{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span class="brand-name">Construction Management System</span>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-button" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </label>
+
+            <nav class="site-nav" aria-label="Main">
+                <a href="/" {% if request.path == '/' %}class="active" aria-current="page"{% endif %}>Home</a>
+                <a href="/clients/" {% if '/clients' in request.path %}class="active"{% endif %}>Clients</a>
+                <a href="/department/" {% if '/department' in request.path %}class="active"{% endif %}>Departments</a>
+                <a href="/employees/" {% if '/employees' in request.path %}class="active"{% endif %}>Employees</a>
+                <a href="/projects/" {% if '/projects' in request.path %}class="active"{% endif %}>Projects</a>
+                <a href="/supplier/" {% if '/supplier' in request.path %}class="active"{% endif %}>Suppliers</a>
+                <a href="/materials/" {% if '/materials' in request.path %}class="active"{% endif %}>Materials</a>
+                <a href="/payments/" {% if '/payments' in request.path %}class="active"{% endif %}>Payments</a>
+                <a href="/projectassignment/" {% if '/projectassignment' in request.path %}class="active"{% endif %}>Assignments</a>
+            </nav>
+        </div>
+    </header>
+
+    {# Pages can add a full-width banner here (the home page uses it for the photo hero) #}
+    {% block hero %}{% endblock %}
+
+    <main class="site-main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-title">Construction Management System</p>
+            <p>All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Employee Management
+{% endblock %}
+
+{% block content %}
+
+<h2>EMPLOYEE MANAGEMENT</h2>
+
+<p>
+    The Employee Management page helps the construction
+    company organize and manage employee information,
+    including names, job positions, salaries, and
+    department assignments. It helps the company monitor
+    its workforce and allocate responsibilities efficiently.
+</p>
+
+<h2>Register New Employee</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="FirstName"
+           placeholder="Enter First Name" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="LastName"
+           placeholder="Enter Last Name" required>
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" name="Gender"
+           placeholder="Enter Gender" required>
+
+    <label for="position">Position:</label>
+    <input type="text" id="position" name="Position"
+           placeholder="Enter Position" required>
+
+    <label for="salary">Salary (UGX):</label>
+    <input type="number" id="salary" name="Salary"
+           min="0" step="0.01"
+           placeholder="Enter Salary" required>
+
+    <label for="hire_date">Hire Date:</label>
+    <input type="date" id="hire_date"
+           name="Hire_Date" required>
+
+    <label for="department_id">Department:</label>
+    <select id="department_id" name="Department" required>
+        <option value="">Select Department</option>
+
+        {% for dept in departments %}
+            <option value="{{ dept.id }}">
+                {{ dept.Department_Name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Register Employee</button>
+    <button type="reset">Clear</button>
+</form>
+
+<h2>Employee Records</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Position</th>
+            <th>Salary (UGX)</th>
+            <th>Hire Date</th>
+            <th>Department</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.FirstName }}</td>
+            <td>{{ employee.LastName }}</td>
+            <td>{{ employee.Gender }}</td>
+            <td>{{ employee.Position }}</td>
+            <td>{{ employee.Salary }}</td>
+            <td>{{ employee.Hire_Date }}</td>
+            <td>{{ employee.Department.Department_Name }}</td>
+
+            <td>
+                <a href="{% url 'update_employee' employee.id %}">
+                    Edit
+                </a>
+            </td>
+
+            <td>
+                <form method="POST"
+                      action="{% url 'delete_employee' employee.id %}"
+                      class="delete-form">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            onclick="return confirm('Are you sure you want to delete this employee?')">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="10">No employee records available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

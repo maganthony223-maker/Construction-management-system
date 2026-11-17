@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Project Assignment Management
+{% endblock %}
+
+{% block content %}
+
+<h2>PROJECT ASSIGNMENT MANAGEMENT</h2>
+
+<p>
+    The Project Assignment Management page helps the
+    construction company assign employees to different
+    projects according to their roles and responsibilities.
+    It records employee IDs, project IDs, assignment roles,
+    and assignment dates. This helps the company coordinate
+    workers, monitor responsibilities, and manage project
+    activities efficiently.
+</p>
+
+<hr>
+
+<h2>Register New Project Assignment</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="employee">Select Employee:</label>
+    <select id="employee" name="Employee" required>
+        <option value="">Select Employee</option>
+
+        {% for employee in employees %}
+        <option value="{{ employee.id }}">
+            {{ employee.FirstName }} {{ employee.LastName }}
+            (ID: {{ employee.id }})
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <label for="project">Select Project:</label>
+    <select id="project" name="Project" required>
+        <option value="">Select Project</option>
+
+        {% for project in projects %}
+        <option value="{{ project.id }}">
+            {{ project.ProjectName }} (ID: {{ project.id }})
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <label for="assignment_role">Assignment Role:</label>
+    <input type="text" id="assignment_role"
+           name="AssignmentRole" required>
+
+    <label for="assignment_date">Assignment Date:</label>
+    <input type="date" id="assignment_date"
+           name="AssignmentDate" required>
+
+    <button type="submit">Assign Employee</button>
+    <button type="reset">Clear</button>
+
+</form>
+
+<hr>
+
+<h2>Project Assignment Records</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Assignment ID</th>
+            <th>Employee ID</th>
+            <th>Project ID</th>
+            <th>Assignment Role</th>
+            <th>Assignment Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for assignment in assignments %}
+
+        <tr>
+            <td>{{ assignment.id }}</td>
+            <td>{{ assignment.Employee_id }}</td>
+            <td>{{ assignment.Project_id }}</td>
+            <td>{{ assignment.AssignmentRole }}</td>
+            <td>{{ assignment.AssignmentDate }}</td>
+
+            <td>
+                <a href="{% url 'update_projectassignment' assignment.id %}">
+                    Edit
+                </a>
+
+                <form method="POST"
+                      action="{% url 'delete_projectassignment' assignment.id %}"
+                      class="delete-form">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            onclick="return confirm('Are you sure you want to delete this assignment?')">
+                        Delete
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="6">
+                No project assignments registered yet.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
