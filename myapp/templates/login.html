@@ -1,74 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Construction Management System - Login</title>
-    {% load static %}
-   <link rel="stylesheet" href="{% static 'style.css' %}">  
 
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
+    <div class="login-page">
 
-    <div class="container">
+        <div class="login-photo">
+            <div class="login-photo-text">
+                <h1>Construction Management System</h1>
+                <p>Clients, projects, crews, materials and payments in one place.</p>
+            </div>
+        </div>
 
-        <h1>CONSTRUCTION MANAGEMENT SYSTEM</h1>
+        <div class="login-panel">
+            <div class="login-box">
+                <h2>Log in</h2>
+                <p class="login-sub">Enter your username and password to continue.</p>
 
-        <img src="../image/construction.jpeg"
+                {% if form.errors %}
+                <p class="login-error">Incorrect username or password. Please try again.</p>
+                {% endif %}
 
-             alt="Construction Image"
-             width="200">
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
 
-        <h2>Login Form</h2>
+                    <label for="id_username">Username</label>
+                    <input type="text" id="id_username" name="username"
+                           placeholder="Enter your username"
+                           autocomplete="username" autofocus required>
 
-        <form action="index.html" method="get">
-            <div class="form-group">
+                    <label for="id_password">Password</label>
+                    <input type="password" id="id_password" name="password"
+                           placeholder="Enter your password"
+                           autocomplete="current-password" required>
 
-            <label for="username">Username:</label>
-
-            <input type="text"
-
-                   id="username"
-
-                   name="username"
-
-                   placeholder="Enter your name"
-
-                   required>
-             </div>
-
-             <div class="form-group">
-
-            <label for="password">Password:</label>
-
-            <input type="password"
-
-                   id="password"
-
-                   name="password"
-
-                   placeholder="Enter your password"
-
-                   required>
-                
-             </div>      
-
-            <button type="submit">Login</button>
-
-        </form>
-
-        <p>Welcome to our Construction Management System.</p>
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
 
     </div>
-
-
 </body>
 
 </html>
