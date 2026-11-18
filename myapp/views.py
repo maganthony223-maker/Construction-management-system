@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_not_required
+from .forms import SignUpForm
 from .models import clients
 from .models import department
 from .models import employees as EmployeeModel, department
@@ -17,8 +20,22 @@ from .models import projects, clients, supplier
 def index(request):
     return render (request, 'index.html')
 
-def login(request):
-    return render (request, 'login.html')
+@login_not_required
+def signup(request):
+    # Already logged in? Go straight to the home page.
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created. Please log in.')
+            return redirect('login')
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signup.html', {'form': form})
 
 
 def clients_view(request):

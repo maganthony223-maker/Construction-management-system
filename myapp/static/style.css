@@ -534,6 +534,184 @@ table a:hover {
     }
 }
 
+
+/* ---------- Logout button in the header ---------- */
+.site-nav .logout-form {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 0 0 8px;
+    max-width: none;
+    display: block;
+}
+
+.site-nav .logout-form button {
+    background: var(--safety);
+    color: var(--navy-dark);
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0;
+    padding: 8px 14px;
+}
+
+.site-nav .logout-form button:hover {
+    background: #ffd35c;
+}
+
+@media screen and (max-width: 900px) {
+    .site-nav .logout-form {
+        margin: 6px 0 0;
+    }
+}
+
+/* ---------- Login and sign-up pages ---------- */
+.login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+}
+
+.login-photo {
+    position: relative;
+    background: var(--navy-dark) url("images/images (36).jpg") center / cover no-repeat;
+}
+
+.login-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 37, 66, 0.35), rgba(15, 37, 66, 0.9));
+}
+
+.login-photo-text {
+    position: absolute;
+    z-index: 1;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    color: #fff;
+}
+
+.login-photo-text h1 {
+    color: #fff;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 10px;
+}
+
+.login-photo-text p {
+    margin: 0;
+    font-size: 18px;
+    max-width: 28em;
+}
+
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    background: #fff;
+    border-top: 4px solid var(--safety);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-box h2 {
+    margin: 0 0 4px;
+    font-size: 36px;
+}
+
+.login-box .login-sub {
+    margin: 0 0 24px;
+    color: #5b6472;
+}
+
+form.login-form {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+
+.login-form button {
+    width: 100%;
+    margin: 6px 0 0;
+    padding: 14px;
+    font-size: 16px;
+    background: var(--navy);
+}
+
+.login-error,
+.login-success {
+    padding: 10px 14px;
+    margin: 0 0 16px;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+.login-error {
+    background: #fdecea;
+    border-left: 4px solid #c0392b;
+    color: #8a1f12;
+}
+
+.login-success {
+    background: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    color: #1b5e20;
+}
+
+.auth-switch {
+    margin: 20px 0 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.auth-switch a {
+    font-weight: 600;
+}
+
+.field .helptext {
+    display: block;
+    color: #5b6472;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: -6px 0 14px;
+}
+
+.field .helptext ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    line-height: 1.4;
+}
+
+.field-error {
+    color: #8a1f12;
+    font-size: 14px;
+    margin: -6px 0 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .login-page {
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px 1fr;
+    }
+
+    .login-photo-text {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .login-photo-text p {
+        display: none;
+    }
+}
+
 /* Respect "reduce motion": show one still photo instead of the slideshow */
 @media (prefers-reduced-motion: reduce) {
     .hero-slides img {

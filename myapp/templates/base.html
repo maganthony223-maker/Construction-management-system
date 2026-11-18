@@ -38,6 +38,13 @@
                 <a href="/materials/" {% if '/materials' in request.path %}class="active"{% endif %}>Materials</a>
                 <a href="/payments/" {% if '/payments' in request.path %}class="active"{% endif %}>Payments</a>
                 <a href="/projectassignment/" {% if '/projectassignment' in request.path %}class="active"{% endif %}>Assignments</a>
+
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Log out ({{ user.username }})</button>
+                </form>
+                {% endif %}
             </nav>
         </div>
     </header>

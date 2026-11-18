@@ -13,6 +13,7 @@ A Django web application that helps a construction company keep organised record
 
 ## Features
 
+- User sign up, login and logout (every page needs a login)
 - Client management
 - Employee and department records
 - Project management with budgets and progress
